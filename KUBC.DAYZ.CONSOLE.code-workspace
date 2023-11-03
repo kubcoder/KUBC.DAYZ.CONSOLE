@@ -1,0 +1,165 @@
+{
+	"settings": {
+		//Папочка где лежит конфиг сервера для запуска
+		"DayZ.Server.Config":"Sample\\serverDZ.cfg",
+		//Папочка где лежит экземпляр сервера DAYZ
+		"DayZ.Server.Path":"C:\\Program Files (x86)\\Steam\\steamapps\\common\\DayZServer",
+		//Путь к инструменту сборки
+		"DayZ.Build.App":"C:\\Program Files (x86)\\Mikero\\DePboTools\\bin\\pboProject.exe",
+		//Как будет называться папочка серверного мода
+		"DayZ.Build.Server.Path":"KUBCconsole",
+		//Как будет называться файл PBO серверного мода
+		"DayZ.Build.Server.Name":"KUBCconsole",
+	},
+	"folders": [
+		{
+			"name": "SERVER",
+			"path": "./Server"
+		},
+		{
+			"name": "PROFILES",
+			"path": "./Sample/Profiles"
+		},
+		{
+			"name": "Build Logs",
+			"path": "P:\\Temp"
+		},
+		{
+			"name": "ROOT",
+			"path": "."
+		},
+	],
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"detail": "Создаем папочку где будет собранный мод сервера",
+				"label": "Create out Path Server",
+				"type": "shell",
+				"command": "if ( -not (Test-Path '${config:DayZ.Server.Path}\\${config:DayZ.Build.Server.Path}') ){mkdir '${config:DayZ.Server.Path}\\${config:DayZ.Build.Server.Path}' }",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				}
+			},
+			{
+				"detail": "Собрать мод сервера",
+				"label": "Server Build",
+				"command": "${config:DayZ.Build.App}",
+				"args": [
+					"${workspaceFolder:SERVER}",
+					"-Mod=${config:DayZ.Server.Path}\\${config:DayZ.Build.Server.Path}",
+					"+Clean",
+					"-P",
+					"-Key",
+					"+L=${config:DayZ.Build.Server.Name}"
+				],
+				"type": "process",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				}
+			},
+			{
+				"detail": "Очистить логи сервера",
+				"label": "Clear Server Logs",
+				"command": "del ${workspaceFolder:PROFILES}\\*.MDMP;del ${workspaceFolder:PROFILES}\\*.log;del ${workspaceFolder:PROFILES}\\*.RPT;del ${workspaceFolder:PROFILES}\\*.ADM",
+				"type": "shell",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				}
+			},
+			{
+				"detail": "Очистить логи упаковщика",
+				"label": "Clear Build Temp",
+				"type": "shell",
+				"command": "if (Test-Path P:\\Temp){Remove-Item P:\\Temp -Recurse}",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				}
+			},
+			{
+				"detail": "Запустить сервер с собранным модом",
+				"label": "Start Server",
+				"type": "shell",
+				"command": "${config:DayZ.Server.Path}\\DayZServer_x64.exe",
+				"args": [
+					"-config=${workspaceFolder:ROOT}\\${config:DayZ.Server.Config}",
+					"-profiles=${workspaceFolder:PROFILES}",
+					"-port=2302",
+					"-doLogs",
+					"-adminLog",
+					"-freezeCheck",
+					"-serverMod='${config:DayZ.Build.Server.Path};'"
+				],
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				}
+			},
+			{
+				"detail": "Собрать мод",
+				"label": "Pack Mod",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"Clear Build Temp",
+					"Create out Path Server",
+					"Server Build"
+				],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+				"detail": "Запустить тестовый сервер с очисткой логов",
+				"label": "Start Test Server",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"Clear Server Logs",
+					"Start Server"
+				],
+				"group": {
+					"kind": "test",
+					"isDefault": false
+				},
+				"problemMatcher": []
+			},
+			{
+				"detail": "Пересобрать мод и запустить сервер",
+				"label": "Pack And Start",
+				"dependsOrder": "sequence",
+				"dependsOn": [
+					"Pack Mod",
+					"Start Test Server"
+				],
+				"group": {
+					"kind": "test",
+					"isDefault": true
+				}
+			}
+		]
+	}
+}
