@@ -13,7 +13,7 @@ class CfgMods
 	class KUBCconsole
 	{
 		name = "KUBC.DAYZ.CONSOLE";
-		author = "kot23rus";
+		author = "kubcoder";
 		version = 2.0;
 		type = "mod";
 		class defs 
