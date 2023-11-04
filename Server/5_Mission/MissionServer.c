@@ -12,6 +12,8 @@ modded class MissionServer
         RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
         RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
         RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
+        RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP());
+        RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
         super.OnInit();      
     }
     /** @brief  ловим события на стороне сервера. Среди потока всех возможных
