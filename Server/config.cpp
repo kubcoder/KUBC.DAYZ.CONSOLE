@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class EraChat
+	class KUBCconsole
 	{
 		units[]= {};
 		weapons[]={};
@@ -10,7 +10,7 @@ class CfgPatches
 };
 class CfgMods 
 {
-	class EraChat
+	class KUBCconsole
 	{
 		name = "KUBC.DAYZ.CONSOLE";
 		author = "kot23rus";

@@ -6,7 +6,8 @@ modded class MissionServer
     */
     override void OnInit()
     {
-        KCGlChatSettings.CreatePaths(); 
+        KCGlChatSettings.CreatePaths();
+        KCCmd.CreatePaths();
         super.OnInit();      
     }
     /** @brief  ловим события на стороне сервера. Среди потока всех возможных

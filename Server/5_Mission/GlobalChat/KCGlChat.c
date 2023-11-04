@@ -5,6 +5,10 @@ class KCGlChat
     /** @brief название модуля отображаемое в логах*/
     static const string MOD_NAME = "KUBC.CHAT";
 
+    /** @brief выполнить запись в лог скриптов от имени модуля чата
+    *   @param Message - текст сообщения
+    *   @param Level - уровень сообщения
+    */
     static void Log(string Message, KCLogLogLevel Level = KCLogLogLevel.Info)
     {
         KCLog.Write(MOD_NAME, Message, Level);
