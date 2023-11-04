@@ -8,6 +8,10 @@ modded class MissionServer
     {
         KCGlChatSettings.CreatePaths();
         KCCmd.CreatePaths();
+        RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
+        RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
+        RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
+        RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
         super.OnInit();      
     }
     /** @brief  ловим события на стороне сервера. Среди потока всех возможных
@@ -20,11 +24,55 @@ modded class MissionServer
             ChatMessageEventParams chat = ChatMessageEventParams.Cast(params);
             if (chat)
             {
-                //TODO: Тут сделать проверку на префикс команды
-                //      и только если не команда вызывать глобальный чат
-                KCGlChat.Execute(chat);
+                if (chat.param3.Get(0)==KCTextCmd.CMD_PREFIX)
+                {
+                    PlayerBase From = KCPlayer.Find(chat.param2);
+                    if (From)
+                    {
+                        int len = chat.param3.Length() - 1;
+                        string cmdText = chat.param3.Substring(1, len);
+                        KCTextCmd cmdData = KCTextCmd.FromChat(cmdText);
+                        if (cmdData)
+                        {
+                            KCUserCMD currentCommand = CommandDictonary.Get(cmdData.Name);
+                            if (currentCommand)
+                            {
+                                currentCommand.Execute(From, cmdData);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    KCGlChat.Execute(chat);
+                }                
             }
         }
         super.OnEvent(eventTypeId,params);
     }
+    /** @brief справочник команд сервера*/
+    ref map<string, ref KCUserCMD> CommandDictonary = new map<string, ref KCUserCMD>();
+
+    /** @brief Зарегистрировать команду
+    *   @param Name Имя команды
+    *   @param command класс команды
+    */
+    void RegisterCommand(string Name, KCUserCMD command)
+    {
+        KCCmd.Log("Добавлена команда [" + Name + "]");
+        CommandDictonary.Insert(Name, command);
+        string sFileName = KCUserCMDAccess.GetFileName(Name);
+        if (!FileExist(sFileName))
+        {
+            KCCmd.Log("Создаем файл настройки доступа по умолчанию для команды [" + Name + "]");            
+            KCUserCMDAccess acces = new KCUserCMDAccess();
+            JsonFileLoader<KCUserCMDAccess>.JsonSaveFile( sFileName, acces);
+        }
+        else
+        {
+            KCCmd.Log("Файл настройки команды [" + Name + "] существует на диске"); 
+        }
+    }
+
+
 }
