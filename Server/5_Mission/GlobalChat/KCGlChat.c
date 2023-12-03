@@ -9,7 +9,7 @@ class KCGlChat
     *   @param Message - текст сообщения
     *   @param Level - уровень сообщения
     */
-    static void Log(string Message, KCLogLogLevel Level = KCLogLogLevel.Info)
+    static void Log(string Message, KCLogLevel Level = KCLogLevel.Info)
     {
         KCLog.Write(MOD_NAME, Message, Level);
     }
@@ -48,7 +48,7 @@ class KCGlChat
                 }
                 else
                 {
-                    KCGlChat.Log("Не нашли отправителя, сообщение пришло от [" + chat.param2 + "], текст сообщения ["+message+"]", KCLogLogLevel.Error);
+                    KCGlChat.Log("Не нашли отправителя, сообщение пришло от [" + chat.param2 + "], текст сообщения ["+message+"]", KCLogLevel.Error);
                 }
             }
         }

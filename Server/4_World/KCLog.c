@@ -1,6 +1,6 @@
 #ifndef KUBC_LOG
 /** @brief перечисление уровня мессаги в логе*/
-enum KCLogLogLevel
+enum KCLogLevel
 {
     Info,
     Warning,
@@ -23,7 +23,7 @@ class KCLog
     *   @param Message - текст сообщения который нужно записать в лог
     *   @param Level - уровень сообщения (информация, предупреждение или ошибка)
     */
-    static void Write(string Source, string Message, KCLogLogLevel Level = KCLogLogLevel.Info)
+    static void Write(string Source, string Message, KCLogLevel Level = KCLogLevel.Info)
     {
         string msg = GetText(Level);
         if (Source!="")
@@ -37,7 +37,7 @@ class KCLog
     *   @param Message - текст сообщения который нужно записать в лог
     *   @param Level - уровень сообщения (информация, предупреждение или ошибка)
     */
-    static void WriteADM(string Source, string Message, KCLogLogLevel Level = KCLogLogLevel.Info)
+    static void WriteADM(string Source, string Message, KCLogLevel Level = KCLogLevel.Info)
     {
         string msg = GetText(Level);
         if (Source!="")
@@ -47,13 +47,13 @@ class KCLog
         GetGame().AdminLog(msg + Message);
     }
     /** @brief Получить уровень записи в текстовом представлении (*.log)*/
-    static string GetText(KCLogLogLevel level)
+    static string GetText(KCLogLevel level)
     {
         switch (level)
         {
-            case KCLogLogLevel.Info:
+            case KCLogLevel.Info:
                 return "[Info]";
-            case KCLogLogLevel.Warning:
+            case KCLogLevel.Warning:
                 return "[Warning]";
         }
         return "[Error]";

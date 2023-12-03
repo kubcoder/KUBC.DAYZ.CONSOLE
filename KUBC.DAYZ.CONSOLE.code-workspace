@@ -108,7 +108,8 @@
 					"-doLogs",
 					"-adminLog",
 					"-freezeCheck",
-					"-serverMod='${config:DayZ.Build.Server.Path};'"
+					"-filePatching",
+					"-serverMod='KUBC.DAYZ.CONSOLE'"
 				],
 				"presentation": {
 					"echo": true,

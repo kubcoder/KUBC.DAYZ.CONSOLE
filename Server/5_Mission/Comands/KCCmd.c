@@ -9,7 +9,7 @@ class KCCmd
     *   @param Message - текст сообщения
     *   @param Level - уровень сообщения
     */
-    static void Log(string Message, KCLogLogLevel Level = KCLogLogLevel.Info)
+    static void Log(string Message, KCLogLevel Level = KCLogLevel.Info)
     {
         KCLog.Write(MOD_NAME, Message, Level);
     }
