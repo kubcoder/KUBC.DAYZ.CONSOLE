@@ -55,5 +55,21 @@ namespace KUBC.DAYZ.CONSOLE
         {
             return new DirectoryInfo($"{GetModPath(profiles).FullName}\\{CMDPATH}");
         }
+
+        /// <summary>
+        /// Папка с сохранеными координатами
+        /// </summary>
+        public const string POINTSPATH = "Points";
+        
+        /// <summary>
+        /// Получить папочку с сохранеными координатами
+        /// </summary>
+        /// <param name="profiles">Папка профилей</param>
+        /// <returns>Папка с сохранеными координатами</returns>
+        public static DirectoryInfo GetPointsPath(DirectoryInfo profiles)
+        {
+            return new DirectoryInfo($"{GetModPath(profiles).FullName}\\{POINTSPATH}");
+        }
+
     }
 }

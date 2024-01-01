@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KUBC.DAYZ.CONSOLE", ".NET\KUBC.DAYZ.CONSOLE\KUBC.DAYZ.CONSOLE.csproj", "{50CD32E5-FBD0-49C9-8B8E-C3A1040AEF9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KUBC.DAYZ.CONSOLE", ".NET\KUBC.DAYZ.CONSOLE\KUBC.DAYZ.CONSOLE.csproj", "{50CD32E5-FBD0-49C9-8B8E-C3A1040AEF9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KUBC.DAYZ.CONSOLE.TEST", ".NET\KUBC.DAYZ.CONSOLE.TEST\KUBC.DAYZ.CONSOLE.TEST.csproj", "{C6BF2CF7-20B6-4F91-AB5E-D25C54A174CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{50CD32E5-FBD0-49C9-8B8E-C3A1040AEF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50CD32E5-FBD0-49C9-8B8E-C3A1040AEF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50CD32E5-FBD0-49C9-8B8E-C3A1040AEF9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6BF2CF7-20B6-4F91-AB5E-D25C54A174CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6BF2CF7-20B6-4F91-AB5E-D25C54A174CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6BF2CF7-20B6-4F91-AB5E-D25C54A174CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6BF2CF7-20B6-4F91-AB5E-D25C54A174CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

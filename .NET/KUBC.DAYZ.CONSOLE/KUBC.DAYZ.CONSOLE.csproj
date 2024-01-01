@@ -47,9 +47,6 @@
 		<PackageReference Include="KUBC.DAYZ.GAME" Version="8.2.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Points\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Compile Update="Resources\CHAT\ChatSettings.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -60,6 +57,11 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>UserCMDAccess.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Resources\Points\PointDictionary.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>PointDictionary.resx</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Update="Resources\CHAT\ChatSettings.resx">
@@ -69,6 +71,10 @@
 	  <EmbeddedResource Update="Resources\CMD\UserCMDAccess.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>UserCMDAccess.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Points\PointDictionary.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>PointDictionary.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 </Project>
