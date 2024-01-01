@@ -17,7 +17,7 @@ class KCUserCMD
 		}
 		else
 		{
-			Log("Пытался выполнить команду. Доступ запрещен", user, KCLogLogLevel.Error);
+			Log("Пытался выполнить команду. Доступ запрещен", user, KCLogLevel.Error);
 		}
 		return false;
 	}
@@ -34,7 +34,7 @@ class KCUserCMD
 	*	@param player - игрок который выполнил команду
 	*	@param Level - уровень сообщения
 	*/
-	void Log(string Message, PlayerBase player = NULL, KCLogLogLevel Level = KCLogLogLevel.Info)
+	void Log(string Message, PlayerBase player = NULL, KCLogLevel Level = KCLogLevel.Info)
 	{
 		string msg = "[" + GetName() + "]";
 		if (player!=NULL)

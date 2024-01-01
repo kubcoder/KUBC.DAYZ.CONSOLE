@@ -6,7 +6,7 @@ class KCUserCmdSP : KCUserCMD
     /** @brief Папка в которой хранятся данные точек которые сохраняет юзер*/
     static const string PATH_NAME = "Points";
     /** @brief глобальный файл точек которые доступны всем пользователям*/
-    static const string GLOBAL_FILE_NAME = "SharedPoints.json"
+    static const string GLOBAL_FILE_NAME = "SharedPoints.json";
 
     /** @brief атрибут указывающий что нужно работать с глобальным списоком точек*/
     static const string ATT_GLOBAL = "g";

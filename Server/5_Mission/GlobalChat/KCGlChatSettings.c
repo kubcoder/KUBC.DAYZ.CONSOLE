@@ -90,7 +90,7 @@ class KCGlChatSettings
         }
         else
         {
-            KCGlChat.Log("Не смогли загрузить файл настроек глобального чата", KCLogLogLevel.Error);
+            KCGlChat.Log("Не смогли загрузить файл настроек глобального чата", KCLogLevel.Error);
             return new KCGlChatSettings();
         }
     }
