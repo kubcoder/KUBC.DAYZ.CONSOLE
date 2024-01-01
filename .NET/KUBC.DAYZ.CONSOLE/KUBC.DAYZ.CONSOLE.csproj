@@ -12,7 +12,7 @@
 		<Description>Инструменты для работы с данными мода KUBC.DAYZ.CONSOLE</Description>
 		<Copyright>KUBC.DAYZ.CONSOLE Copyright (C) 2024 KUBCODER</Copyright>
 		<RepositoryUrl>https://github.com/kubcoder/KUBC.DAYZ.CONSOLE</RepositoryUrl>
-		<PackageReleaseNotes>Добавляем инструментарий для работы с данными мода</PackageReleaseNotes>
+		<PackageReleaseNotes>Добавляем инструментарий .NET для работы с данными мода</PackageReleaseNotes>
 		<NeutralLanguage>ru</NeutralLanguage>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
