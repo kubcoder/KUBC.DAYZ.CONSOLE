@@ -86,17 +86,10 @@ class KCTextCmd
         int fLen = name.Length();
         foreach(string arg:Arg)
         {
-            int Len = arg.Length();
-            if(Len>(fLen+1))
+            KCTextCmdArg iArg = new KCTextCmdArg(arg);
+            if (iArg.Name == name)
             {
-                string aName = arg.Substring(0, fLen);
-                if (aName==name)
-                {
-                    
-                    Len -= fLen;
-                    Len -= 1;
-                    return arg.Substring(fLen+1, Len);
-                }
+                return iArg.Value;
             }
         }
         return "";
@@ -111,18 +104,11 @@ class KCTextCmd
         int fLen = name.Length();
         foreach(string arg:Arg)
         {
-            /*
-            TStringArray argItems = new TStringArray;
-            TextCMD.Split("=", argItems);
-            
-            if(arg.Length()>=fLen)
+            KCTextCmdArg iArg = new KCTextCmdArg(arg);
+            if (iArg.Name == name)
             {
-                string aName = arg.Substring(0, fLen);
-                if (aName==name)
-                {
-                    return true;
-                }
-            }*/
+                return true;
+            }
         }
         return false;
     }

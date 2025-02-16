@@ -39,6 +39,11 @@ void main()
 	KCLog.Write("TEST", "Имя аргумента:"+ argSec.Name);
 	KCLog.Write("TEST", "Есть значение:"+ argSec.HasValue());
 	KCLog.Write("TEST", "Значение аргумента:"+ argSec.Value);
+	
+	string cmdText = "/car repair:d=100";
+	KCTextCmd cmd = KCTextCmd.FromChat(cmdText);
+	float dist = cmd.GetInt("d",0);
+	KCLog.Write("TEST", "Дистанция поиска "+ dist);
 }
 
 class CustomMission: MissionServer
