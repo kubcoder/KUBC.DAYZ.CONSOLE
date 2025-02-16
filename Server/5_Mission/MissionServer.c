@@ -21,11 +21,17 @@ modded class MissionServer
     */
     override void OnEvent(EventType eventTypeId, Param params)  
     {
+        if (eventTypeId==ChatChannelEventTypeID)
+        {
+            KCGlChat.Log("Поймали событие Канала");
+        }
         if (eventTypeId==ChatMessageEventTypeID)
         {
+            KCGlChat.Log("Поймали событие чата");
             ChatMessageEventParams chat = ChatMessageEventParams.Cast(params);
             if (chat)
             {
+                
                 if (chat.param3.Get(0)==KCTextCmd.CMD_PREFIX)
                 {
                     PlayerBase From = KCPlayer.Find(chat.param2);

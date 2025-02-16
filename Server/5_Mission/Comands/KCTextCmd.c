@@ -101,6 +101,7 @@ class KCTextCmd
         }
         return "";
     }
+
     /** @brief определить есть ли в тексте команды указанный аргумент
     *   @param name имя аргумента
     *   @return Истина, если аргумент был найден.
@@ -110,6 +111,10 @@ class KCTextCmd
         int fLen = name.Length();
         foreach(string arg:Arg)
         {
+            /*
+            TStringArray argItems = new TStringArray;
+            TextCMD.Split("=", argItems);
+            
             if(arg.Length()>=fLen)
             {
                 string aName = arg.Substring(0, fLen);
@@ -117,7 +122,7 @@ class KCTextCmd
                 {
                     return true;
                 }
-            }
+            }*/
         }
         return false;
     }

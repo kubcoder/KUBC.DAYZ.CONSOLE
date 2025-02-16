@@ -3,7 +3,14 @@
 		//Папочка где лежит конфиг сервера для запуска
 		"DayZ.Server.Config":"Sample\\serverDZ.cfg",
 		//Папочка где лежит экземпляр сервера DAYZ
-		"DayZ.Server.Path":"C:\\Program Files (x86)\\Steam\\steamapps\\common\\DayZServer",
+		"DayZ.Server.Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\DayZServer",
+		"C_Cpp.codeAnalysis.clangTidy.codeAction.formatFixes": false,
+		"C_Cpp.autocompleteAddParentheses": false,
+		"C_Cpp.configurationWarnings": "disabled",
+		"C_Cpp.errorSquiggles": "disabled",
+		"C_Cpp.default.systemIncludePath": [
+			"P:\\"
+		],
 	},
 	"folders": [
 		{
