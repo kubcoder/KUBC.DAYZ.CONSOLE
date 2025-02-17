@@ -86,21 +86,15 @@ class KCTextCmd
         int fLen = name.Length();
         foreach(string arg:Arg)
         {
-            int Len = arg.Length();
-            if(Len>(fLen+1))
+            KCTextCmdArg iArg = new KCTextCmdArg(arg);
+            if (iArg.Name == name)
             {
-                string aName = arg.Substring(0, fLen);
-                if (aName==name)
-                {
-                    
-                    Len -= fLen;
-                    Len -= 1;
-                    return arg.Substring(fLen+1, Len);
-                }
+                return iArg.Value;
             }
         }
         return "";
     }
+
     /** @brief определить есть ли в тексте команды указанный аргумент
     *   @param name имя аргумента
     *   @return Истина, если аргумент был найден.
@@ -110,13 +104,10 @@ class KCTextCmd
         int fLen = name.Length();
         foreach(string arg:Arg)
         {
-            if(arg.Length()>=fLen)
+            KCTextCmdArg iArg = new KCTextCmdArg(arg);
+            if (iArg.Name == name)
             {
-                string aName = arg.Substring(0, fLen);
-                if (aName==name)
-                {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
