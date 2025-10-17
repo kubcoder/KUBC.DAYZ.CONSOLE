@@ -27,21 +27,22 @@ class KCGlChat
                 PlayerBase From = KCPlayer.Find(chat.param2);
                 if (From)
                 {
+                    string toPlayers = string.Format(sett.MessageFormat, chat.param2, message);
                     switch(sett.Access)
                     {
                         case KCAccessType.All:
-                            SendToAll(From, message);
+                            SendToAll(From, toPlayers);
                             break;
                         case KCAccessType.WhiteList:
                             if (sett.InList(From))
                             {
-                                SendToAll(From, message);
+                                SendToAll(From, toPlayers);
                             }
                             break;
                         case KCAccessType.BlackList:
                             if (!sett.InList(From))
                             {
-                                SendToAll(From, message);
+                                SendToAll(From, toPlayers);
                             }
                             break;
                     }
@@ -59,19 +60,20 @@ class KCGlChat
     */
     static void SendToAll(PlayerBase player, string Message)
     {
-        if (player)
+        if ((player)&&(player.GetIdentity()))
         {
-            string From = player.GetIdentity().GetName();
+            string From = player.GetIdentity().GetName(); 
             array<Man> players = new array<Man>; 
             GetGame().GetPlayers(players);
+            Param1<string> pt = new Param1<string>(Message);
             foreach(Man m:players)
             {
                 PlayerBase reciver = PlayerBase.Cast(m);
-                if(reciver)
+                if((reciver)&&(reciver.GetIdentity()))
                 {
                     if (reciver != player)
                     {
-                        KCPlayer.SendMessage(reciver, From, Message);
+                        GetGame().RPCSingleParam(reciver, ERPCs.RPC_USER_ACTION_MESSAGE, pt, true, reciver.GetIdentity());
                     }
                 }
             }

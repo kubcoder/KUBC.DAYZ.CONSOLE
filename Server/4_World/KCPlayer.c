@@ -48,8 +48,10 @@ class KCPlayer
         {
             pt = new Param1<string>(Message);
         }
-        
-		GetGame().RPCSingleParam(player, ERPCs.RPC_USER_ACTION_MESSAGE, pt, true, player.GetIdentity());
+        if (player.GetIdentity())
+		{
+			GetGame().RPCSingleParam(player, ERPCs.RPC_USER_ACTION_MESSAGE, pt, true, player.GetIdentity());
+		}
     }
 }
 #define KUBC_PLAYER
