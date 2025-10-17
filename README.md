@@ -3,7 +3,7 @@
 - Глобальный чат
 - Текстовые команды
 
-**[Подробное описание на сайте разработчика](https://kubcoder.ru/dayz/console/index)**
+**[Подробное описание на сайте разработчика](https://kubcoder.ru/dayz/console)**
 
 ## Глобальный чат
 Обеспечивает доставку сообщений из чата всем игрокам сервера вне зависимости от дистанции между ними. Т.е. буквально сообщение в чат будут видеть все игроки сервера. 
@@ -13,8 +13,14 @@
 ## Текстовые команды
 Функция выполнения действий на стороне сервера по текстовым командам из чата. Данная функция может реализовать функционал администрирования игры без использования клиентского мода. В данном моде добавляются базовые классы команд, а также методика управления доступом к той или иной команде. 
 - [Как вызывать команду в игре](https://kubcoder.ru/dayz/console/cmd/format)
-- [Полный список команд](https://kubcoder.ru/dayz/console/cmd/)
 - [Как добавить новую команду](https://kubcoder.ru/dayz/console/cmd/moding)
+- Команды
+    - [god](https://kubcoder.ru/dayz/console/cmd/god)
+    - [heal](https://kubcoder.ru/dayz/console/cmd/heal)
+    - [time](https://kubcoder.ru/dayz/console/cmd/time)
+    - [weather](https://kubcoder.ru/dayz/console/cmd/weather)
+    - [sp](https://kubcoder.ru/dayz/console/cmd/sp)
+    - [jump](https://kubcoder.ru/dayz/console/cmd/jump)
 
 
 # Инструменты
