@@ -7,8 +7,13 @@ class KCPlayer
 	*/
     static PlayerBase Find(string name) 
 	{
+
 		PlayerBase p;
 		name.ToLower();
+		if (name=="survivor")
+		{
+			return null;
+		}
 		int i =0;
 		//Получаем список всех игроков на сервере
 		array<Man> players = new array<Man>; 
@@ -16,9 +21,10 @@ class KCPlayer
 		//Поочередно перебираем каждого игрока
 		for (i = 0; i < players.Count(); i++ ) 
 		{
+			
 			//Берем конкретного игрока сервера
 			p = PlayerBase.Cast(players.Get(i));
-			if(p)
+			if((p)&&(p.GetIdentity()))
 			{
 				string pn = p.GetIdentity().GetName();
 				pn.ToLower();
@@ -28,6 +34,7 @@ class KCPlayer
 					return p;//Если совпало то возращаем экземпляр игрока 
 			}
 		}
+
 		//Если пришли сюда то игрока с указанным именем или PlainID сейчас нет на сервере, возвращаем пустоту
 		return NULL;
 	}

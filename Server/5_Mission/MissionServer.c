@@ -31,7 +31,6 @@ modded class MissionServer
             ChatMessageEventParams chat = ChatMessageEventParams.Cast(params);
             if (chat)
             {
-                
                 if (chat.param3.Get(0)==KCTextCmd.CMD_PREFIX)
                 {
                     PlayerBase From = KCPlayer.Find(chat.param2);
