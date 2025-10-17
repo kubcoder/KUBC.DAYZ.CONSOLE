@@ -1,9 +1,7 @@
 {
     "Enable": 1,
-    "Access": 1,
+    "Access": 0,
     "Players": [],
-    "ExecuteSymbols": [
-        "*",
-        "/"
-    ]
+    "ExecuteSymbols": [],
+    "MessageFormat": "%1:%2"
 }
