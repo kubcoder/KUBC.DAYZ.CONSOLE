@@ -6,6 +6,12 @@ modded class MissionServer
     */
     override void OnInit()
     {
+        #ifdef PLATFORM_WINDOWS
+        KCLog.Write("KUBC","Сервер собран для Windows");
+        #endif
+        #ifdef PLATFORM_LINUX
+        KCLog.Write("KUBC","Сервер собран для Linux");
+        #endif
         KCGlChatSettings.CreatePaths();
         KCCmd.CreatePaths();
         RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
