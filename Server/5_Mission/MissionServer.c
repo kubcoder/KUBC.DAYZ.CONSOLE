@@ -6,12 +6,7 @@ modded class MissionServer
     */
     override void OnInit()
     {
-        #ifdef PLATFORM_WINDOWS
-        KCLog.Write("KUBC","Сервер собран для Windows");
-        #endif
-        #ifdef PLATFORM_LINUX
-        KCLog.Write("KUBC","Сервер собран для Linux");
-        #endif
+        ChekPlatform();
         KCGlChatSettings.CreatePaths();
         KCCmd.CreatePaths();
         RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
@@ -22,6 +17,20 @@ modded class MissionServer
         RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
         super.OnInit();      
     }
+
+    private void ChekPlatform()
+    {
+        #ifdef PLATFORM_WINDOWS
+        KCLog.Write("KUBC","Сервер собран для Windows");
+        return;
+        #endif
+        #ifdef PLATFORM_LINUX
+        KCLog.Write("KUBC","Сервер собран для Linux");
+        return;
+        #endif
+        KCLog.Write("KUBC","Не смогли определить платформу, работа мода не гарантируется", KCLogLevel.Error);
+    }
+
     /** @brief  ловим события на стороне сервера. Среди потока всех возможных
     *           выделяем события когда игрок отправляет текстовое сообщение в чат
     */
