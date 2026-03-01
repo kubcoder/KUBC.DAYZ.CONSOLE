@@ -1,23 +1,27 @@
 modded class MissionServer
 {
-    /** @brief  Инициализируем настройки мода.
-    *           В частности создаем структуру папочек, и файлы настроек 
-                по умолчанию.
-    */
+    /// @brief Экземпляр обрабатывающий глобальный чат
+    ref KCGlChat globalChat;
+    
+    /// @brief  Инициализируем настройки мода.
+    ///         В частности создаем структуру папочек, и файлы настроек 
+    ///         по умолчанию.
     override void OnInit()
     {
         ChekPlatform();
-        KCGlChatSettings.CreatePaths();
-        KCCmd.CreatePaths();
+        globalChat = new KCGlChat();
         RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
         RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
         RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
         RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
         RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP());
         RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
-        super.OnInit();      
+        super.OnInit();   
     }
 
+    /// @brief Проверяем под какой платформой запустились
+    ///        Данный метод нужен что бы понять почему мод не работает
+    ///        где то... гребаання кросплатформенность.
     private void ChekPlatform()
     {
         #ifdef PLATFORM_WINDOWS
@@ -36,10 +40,6 @@ modded class MissionServer
     */
     override void OnEvent(EventType eventTypeId, Param params)  
     {
-        if (eventTypeId==ChatChannelEventTypeID)
-        {
-            KCGlChat.Log("Поймали событие Канала");
-        }
         if (eventTypeId==ChatMessageEventTypeID)
         {
             KCGlChat.Log("Поймали событие чата");
@@ -66,7 +66,10 @@ modded class MissionServer
                 }
                 else
                 {
-                    KCGlChat.Execute(chat);
+                    if (globalChat)
+                    {
+                        globalChat.Execute(chat);
+                    }
                 }                
             }
         }

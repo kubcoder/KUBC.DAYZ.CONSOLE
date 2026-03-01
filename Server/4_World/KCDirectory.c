@@ -11,7 +11,7 @@ class KCDirectory
     }
 
     /// @brief Создать структуру папок
-    void CreatePath()
+    void CreatePaths()
     {
         for(int i=0; i< pathNames.Count(); i++)
         {
