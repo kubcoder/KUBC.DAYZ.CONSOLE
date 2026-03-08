@@ -1,4 +1,4 @@
-/** @brief Команда лечения игрока*/
+/// @brief Команда лечения игрока
 class KCUserCmdHeal : KCUserCMD
 {
     static const string CMD_NAME = "heal";
@@ -15,44 +15,39 @@ class KCUserCmdHeal : KCUserCMD
     {
         return KCUserCmdHeal.CMD_NAME;
     }
+
     override bool Execute(KCTextCmd data)
     {
-        /*
-        if (!data.Player)
-        {
-            data.Player = user;
-        }
         int pIndex = data.Arg.Find(BASE);
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
-            BaseHeal(data.Player, user.GetIdentity().GetName());
+            BaseHeal(data.GetTarget(), data.OwnerName());
         }
         pIndex = data.Arg.Find(BONE);
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
-            BoneHeal(data.Player, user.GetIdentity().GetName());
+            BoneHeal(data.GetTarget(), data.OwnerName());
         }
         pIndex = data.Arg.Find(CRANK);
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
-            CrankHeal(data.Player, user.GetIdentity().GetName());
+            CrankHeal(data.GetTarget(), data.OwnerName());
         }
         pIndex = data.Arg.Find(ENERGY);
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
-            EnergyHeal(data.Player, user.GetIdentity().GetName());
+            EnergyHeal(data.GetTarget(), data.OwnerName());
         }
         pIndex = data.Arg.Find(COLD);
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
-            TemperatureHeal(data.Player, user.GetIdentity().GetName());
+            TemperatureHeal(data.GetTarget(), data.OwnerName());
         }
         pIndex = data.Arg.Find(DRINK);
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
-            DrinkHeal(data.Player, user.GetIdentity().GetName());
+            DrinkHeal(data.GetTarget(), data.OwnerName());
         }
-            */
         return true;
     }
     void BaseHeal(PlayerBase target, string From="")

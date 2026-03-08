@@ -13,6 +13,29 @@ class KCTextCmd
     /// @brief Кто вызвал команду
     PlayerBase Owner = NULL;
 
+    PlayerBase GetTarget()
+    {
+        if (Player)
+        {
+            return Player;
+        }
+        return Owner;
+    }
+
+    string OwnerName()
+    {
+        if (Owner)
+        {
+            return Owner.GetIdentity().GetName();
+        }
+        KCCmd.Log("Не найден игрок который выполнил команду", KCLogLevel.Error);
+        if (Player)
+        {
+            return Player.GetIdentity().GetName();
+        }
+        return "";
+    }
+
     /// @brief  Никнейм игрока кому выдать результаты команды
     ///         В эту строку сбрасывается никнейм игрока, после чего
     ///         выполняется поиск кому же применить команду.
