@@ -12,8 +12,9 @@ class KCUserCmdWeather : KCUserCMD
     {
         return KCUserCmdWeather.CMD_NAME;
     }
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    override bool Execute(KCTextCmd data)
     {
+        /*
         Weather w = GetGame().GetWeather();
         Overcast o = w.GetOvercast();
 		Fog f = w.GetFog();
@@ -65,7 +66,7 @@ class KCUserCmdWeather : KCUserCMD
                 f.Set(newFog, 1,1);
                 KCPlayer.SendMessage(user,"", "Fog:" + actFog + "->" + newFog); 
             }
-        }
+        }*/
         return true;
     }
 }

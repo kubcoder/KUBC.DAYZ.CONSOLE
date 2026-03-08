@@ -14,8 +14,9 @@ class KCUserCmdTime : KCUserCMD
         return KCUserCmdTime.CMD_NAME;
     }
 
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    override bool Execute(KCTextCmd data)
     {
+        /*
         int year, month, day, hour, minute;
         GetGame().GetWorld().GetDate(year, month, day, hour, minute);
         if (data.Arg.Count()>0)
@@ -62,6 +63,7 @@ class KCUserCmdTime : KCUserCMD
             }
         }
         KCPlayer.SendMessage(user,"", day.ToStringLen(2) + "." + month.ToStringLen(2) + "." + year.ToStringLen(4) + " " + hour.ToStringLen(2) + ":" + minute.ToStringLen(2));
+        */
         return true;
     }
 }

@@ -1,7 +1,9 @@
 modded class MissionServer
 {
     /// @brief Экземпляр обрабатывающий глобальный чат
-    ref KCGlChat globalChat;
+    private ref KCGlChat globalChat;
+
+    private ref KCCmd usersCmd;
     
     /// @brief  Инициализируем настройки мода.
     ///         В частности создаем структуру папочек, и файлы настроек 
@@ -10,12 +12,13 @@ modded class MissionServer
     {
         ChekPlatform();
         globalChat = new KCGlChat();
-        RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
-        RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
-        RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
-        RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
-        RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP());
-        RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
+        usersCmd = new KCCmd();
+        usersCmd.RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
+        usersCmd.RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
+        usersCmd.RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
+        usersCmd.RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
+        usersCmd.RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP());
+        usersCmd.RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
         super.OnInit();   
     }
 
@@ -42,62 +45,27 @@ modded class MissionServer
     {
         if (eventTypeId==ChatMessageEventTypeID)
         {
-            KCGlChat.Log("Поймали событие чата");
             ChatMessageEventParams chat = ChatMessageEventParams.Cast(params);
             if (chat)
             {
-                if (chat.param3.Get(0)==KCTextCmd.CMD_PREFIX)
-                {
-                    PlayerBase From = KCPlayer.Find(chat.param2);
-                    if (From)
-                    {
-                        int len = chat.param3.Length() - 1;
-                        string cmdText = chat.param3.Substring(1, len);
-                        KCTextCmd cmdData = KCTextCmd.FromChat(cmdText);
-                        if (cmdData)
-                        {
-                            KCUserCMD currentCommand = CommandDictonary.Get(cmdData.Name);
-                            if (currentCommand)
-                            {
-                                currentCommand.Execute(From, cmdData);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (globalChat)
-                    {
-                        globalChat.Execute(chat);
-                    }
-                }                
+                DoChat(chat);                
             }
         }
         super.OnEvent(eventTypeId,params);
     }
-    /** @brief справочник команд сервера*/
-    ref map<string, ref KCUserCMD> CommandDictonary = new map<string, ref KCUserCMD>();
 
-    /** @brief Зарегистрировать команду
-    *   @param Name Имя команды
-    *   @param command класс команды
-    */
-    void RegisterCommand(string Name, KCUserCMD command)
+    private void DoChat(ChatMessageEventParams chat)
     {
-        KCCmd.Log("Добавлена команда [" + Name + "]");
-        CommandDictonary.Insert(Name, command);
-        string sFileName = KCUserCMDAccess.GetFileName(Name);
-        if (!FileExist(sFileName))
+        if (usersCmd)
         {
-            KCCmd.Log("Создаем файл настройки доступа по умолчанию для команды [" + Name + "]");            
-            KCUserCMDAccess acces = new KCUserCMDAccess();
-            JsonFileLoader<KCUserCMDAccess>.JsonSaveFile( sFileName, acces);
+            if (usersCmd.Execute(chat))
+            {
+                return;
+            }
         }
-        else
+        if (globalChat)
         {
-            KCCmd.Log("Файл настройки команды [" + Name + "] существует на диске"); 
-        }
+            globalChat.Execute(chat);
+        }        
     }
-
-
 }

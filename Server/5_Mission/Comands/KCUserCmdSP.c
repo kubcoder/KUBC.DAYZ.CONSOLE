@@ -12,7 +12,7 @@ class KCUserCmdSP : KCUserCMD
     static const string ATT_GLOBAL = "g";
     /** @brief атрибут указывающий что нужно перезаписать точку*/
     static const string ATT_OWERWRITE = "r";
-
+/*
     static string GetPath()
     {
         return "$profile:"+KCCmd.ROOT_PATH + "\\" + KCUserCmdSP.PATH_NAME;
@@ -94,4 +94,5 @@ class KCUserCmdSP : KCUserCMD
     {
         return KCUserCmdSP.GetPath() + "\\" + GLOBAL_FILE_NAME;
     }
+        */
 }

@@ -15,7 +15,7 @@ class KCDirectory
     {
         for(int i=0; i< pathNames.Count(); i++)
         {
-            MakeDirectory(GetName(i));
+            MakeDirectory(GetName(i+1));
         }
     }
 
@@ -25,7 +25,7 @@ class KCDirectory
     string GetName(int i)
     {
         string result = "$profile:";
-        for(int j=0; j <= i;j++)
+        for(int j=0; j < i;j++)
         {
             if (j==0)
             {
@@ -43,7 +43,7 @@ class KCDirectory
     /// @return Полное название папки
     string GetName()
     {
-        return GetName(pathNames.Count() - 1);
+        return GetName(pathNames.Count());
     }
 
     /// @brief Получить полное имя файла

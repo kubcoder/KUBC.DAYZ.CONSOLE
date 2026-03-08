@@ -15,8 +15,9 @@ class KCUserCmdHeal : KCUserCMD
     {
         return KCUserCmdHeal.CMD_NAME;
     }
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    override bool Execute(KCTextCmd data)
     {
+        /*
         if (!data.Player)
         {
             data.Player = user;
@@ -51,6 +52,7 @@ class KCUserCmdHeal : KCUserCMD
         {
             DrinkHeal(data.Player, user.GetIdentity().GetName());
         }
+            */
         return true;
     }
     void BaseHeal(PlayerBase target, string From="")

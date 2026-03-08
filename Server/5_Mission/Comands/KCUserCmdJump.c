@@ -2,7 +2,7 @@
 class KCUserCmdJump : KCUserCMD
 {
     static const string CMD_NAME = "jump";
-
+/*
     override string GetName()
     {
         return KCUserCmdJump.CMD_NAME;
@@ -29,7 +29,7 @@ class KCUserCmdJump : KCUserCMD
         return false;
     }
     /** @brief путешествуем по карте*/
-    bool JumpTo(PlayerBase player, KCTextCmd data)
+    /*bool JumpTo(PlayerBase player, KCTextCmd data)
     {
         if (data.Player != null)
         {
@@ -88,7 +88,7 @@ class KCUserCmdJump : KCUserCMD
     }
 
     /** @brief прыгаем в верх*/
-    bool JumpUp(PlayerBase player, KCTextCmd data)
+    /*bool JumpUp(PlayerBase player, KCTextCmd data)
     {
         float delta = data.ExtText.ToFloat();
         vector target = player.GetPosition();
@@ -97,7 +97,7 @@ class KCUserCmdJump : KCUserCMD
         return true;
     }
     /** @brief Телепортируем игрока к админу*/
-    bool TeleportPlayer(PlayerBase player, KCTextCmd data)
+    /*bool TeleportPlayer(PlayerBase player, KCTextCmd data)
     {
         if(data.Player != null)
         {
@@ -109,5 +109,5 @@ class KCUserCmdJump : KCUserCMD
             KCPlayer.SendMessage(player,"","Игрок [" + data.ExtText + "] не найден");
             return false;
         }
-    }
+    }*/
 }
