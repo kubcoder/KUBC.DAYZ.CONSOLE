@@ -1,27 +1,19 @@
-/** @brief Команда сохранения точек положения игрока на диске сервера */
+/// @brief Команда сохранения точек положения игрока на диске сервера 
 class KCUserCmdSP : KCUserCMD
 {
-    /** @brief Название команды */
-    static const string CMD_NAME = "sp";
-    /** @brief Папка в которой хранятся данные точек которые сохраняет юзер*/
-    static const string PATH_NAME = "Points";
-    /** @brief глобальный файл точек которые доступны всем пользователям*/
-    static const string GLOBAL_FILE_NAME = "SharedPoints.json";
+    /// @brief Название команды 
+    const string CMD_NAME = "sp";
 
-    /** @brief атрибут указывающий что нужно работать с глобальным списоком точек*/
-    static const string ATT_GLOBAL = "g";
-    /** @brief атрибут указывающий что нужно перезаписать точку*/
-    static const string ATT_OWERWRITE = "r";
-/*
-    static string GetPath()
-    {
-        return "$profile:"+KCCmd.ROOT_PATH + "\\" + KCUserCmdSP.PATH_NAME;
-    }
+    /// @brief атрибут указывающий что нужно работать с глобальным списоком точек
+    const string ATT_GLOBAL = "g";
+    /// @brief атрибут указывающий что нужно перезаписать точку
+    const string ATT_OWERWRITE = "r";
 
-    void KCUserCmdSP()
+    ref KCPointManager pointManager;
+
+    void KCUserCmdSP(KCPointManager manager)
     {
-        MakeDirectory("$profile:"+KCCmd.ROOT_PATH);
-        MakeDirectory(KCUserCmdSP.GetPath());
+        pointManager = manager;
     }
 
     override string GetName()
@@ -29,20 +21,20 @@ class KCUserCmdSP : KCUserCMD
         return KCUserCmdSP.CMD_NAME;
     }
 
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    override bool Execute(KCTextCmd data)
     {
         if ((data.Arg.Count()>0)&&(data.Arg[0]!=""))
         {
-            string FileName = "";
+            string fileName = "";
             if (data.ContainsArg(ATT_GLOBAL))
             {
-                FileName = GetGlobalFileName();
+                fileName = pointManager.PointsDirectory.GetFileName();
             }
             else
             {
-                FileName = GetUserFileName(user);
+                fileName = pointManager.PointsDirectory.GetFileName(data.Owner);
             }
-            TPointMap points = GetPoints(FileName);
+            TPointMap points = pointManager.GetPoints(fileName);
             string pointName = data.Arg[0];
             pointName.ToLower();
             KCPoint point = points.Get(pointName);
@@ -50,49 +42,28 @@ class KCUserCmdSP : KCUserCMD
             {
                 if (data.ContainsArg(ATT_OWERWRITE))
                 {
-                    point.Position = user.GetPosition();
-                    point.Orientation = user.GetOrientation();
-                    KCPlayer.SendMessage(user,"", "Точка [" + pointName + "] обновлена"); 
-                    Log("Точка [" + pointName + "] обновлена", user);               
+                    point.Set(data.Owner);
+                    KCPlayer.SendMessage(data.Owner,"", "Точка [" + pointName + "] обновлена"); 
+                    Log("Точка [" + pointName + "] обновлена", data.Owner);               
                 }
                 else
                 {
-                    KCPlayer.SendMessage(user,"", "Точка [" + pointName + "] уже существует!"); 
+                    KCPlayer.SendMessage(data.Owner,"", "Точка [" + pointName + "] уже существует!"); 
                     return false;
                 }
             }
             else
             {
                 point = new KCPoint();
-                point.Position = user.GetPosition();
-                point.Orientation = user.GetOrientation();
+                point.Set(data.Owner);
                 points.Insert(pointName, point);
-                KCPlayer.SendMessage(user,"", "Точка [" + pointName + "] добавлена");   
-                Log("Точка [" + pointName + "] добавлена", user);
+                KCPlayer.SendMessage(data.Owner,"", "Точка [" + pointName + "] добавлена");   
+                Log("Точка [" + pointName + "] добавлена", data.Owner);
             }
-            JsonFileLoader<TPointMap>.JsonSaveFile( FileName, points);
+            pointManager.Save(fileName, points);
             return true;
         } 
         return false;       
     }
 
-    static TPointMap GetPoints(string FileName)
-    {
-        TPointMap points;
-        JsonFileLoader<TPointMap>.JsonLoadFile(FileName, points);
-        if (points)
-            return points;
-        return new TPointMap();       
-    }
-
-    static string GetUserFileName(PlayerBase user)
-    {
-        return KCUserCmdSP.GetPath() + "\\" + user.GetIdentity().GetPlainId() + ".json";
-    }
-
-    static string GetGlobalFileName()
-    {
-        return KCUserCmdSP.GetPath() + "\\" + GLOBAL_FILE_NAME;
-    }
-        */
 }

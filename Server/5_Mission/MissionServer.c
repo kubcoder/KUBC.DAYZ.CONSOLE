@@ -3,7 +3,11 @@ modded class MissionServer
     /// @brief Экземпляр обрабатывающий глобальный чат
     private ref KCGlChat globalChat;
 
+    /// @brief Движок команд игроков
     private ref KCCmd usersCmd;
+
+    /// @brief Менеджер сохраненных точек
+    private ref KCPointManager pointManager;
     
     /// @brief  Инициализируем настройки мода.
     ///         В частности создаем структуру папочек, и файлы настроек 
@@ -17,7 +21,8 @@ modded class MissionServer
         usersCmd.RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
         usersCmd.RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
         usersCmd.RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
-        usersCmd.RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP());
+        pointManager = new KCPointManager();
+        usersCmd.RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP(pointManager));
         usersCmd.RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
         super.OnInit();   
     }

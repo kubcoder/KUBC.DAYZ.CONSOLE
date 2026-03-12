@@ -1,9 +1,15 @@
-/** @brief Класс сохраненной точки */
+/// @brief Класс сохраненной точки 
 class KCPoint
 {
-    /** @brief Координата */
+    /// @brief Координата
     vector Position;
-    /** @brief Ориентация*/
+    /// @brief Ориентация
     vector Orientation;
+
+    void Set(PlayerBase player)
+    {
+        Position = player.GetPosition();
+        Orientation = player.GetOrientation();
+    }
 }
 typedef map<string, ref KCPoint>	TPointMap;
