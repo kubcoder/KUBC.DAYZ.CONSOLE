@@ -4,7 +4,7 @@ class KCPointManager
     /// @brief Директория точек пользователей
     ref KCPointDirectory PointsDirectory;
 
-    void KCPointFactory()
+    void KCPointManager()
     {
         PointsDirectory = new KCPointDirectory();
         PointsDirectory.CreatePaths();    
