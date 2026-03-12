@@ -2,38 +2,46 @@
 class KCUserCmdJump : KCUserCMD
 {
     static const string CMD_NAME = "jump";
-/*
+
     override string GetName()
     {
         return KCUserCmdJump.CMD_NAME;
     }
 
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    ref KCPointManager pointManager;
+
+    void KCUserCmdJump(KCPointManager manager)
+    {
+        pointManager = manager;
+    }
+
+    override bool Execute(KCTextCmd data)
     {
         if (data.Arg[0] == ">")
         {
-            return JumpTo(user, data);
+            return JumpTo(data);
             
         }
         if (data.Arg[0]=="<")
         {
-            return TeleportPlayer(user, data);
+            return TeleportPlayer(data);
             
         }
         if (data.Arg[0]=="^")
         {
-            return JumpUp(user, data);
+            return JumpUp(data);
             
         }
-        KCPlayer.SendMessage(user,"","Неправильный формат команды!");
+        KCPlayer.SendMessage(data.Owner,"","Неправильный формат команды!");
         return false;
     }
+
     /** @brief путешествуем по карте*/
-    /*bool JumpTo(PlayerBase player, KCTextCmd data)
+    bool JumpTo(KCTextCmd data)
     {
         if (data.Player != null)
         {
-            player.SetPosition(data.Player.GetPosition());
+            data.Owner.SetPosition(data.Player.GetPosition());
             return true;
         }
         TStringArray sVector = new TStringArray;
@@ -49,65 +57,53 @@ class KCUserCmdJump : KCUserCMD
                 {
                     target[1] = GetGame().SurfaceY(target[0],target[2]);
                 }
-                player.SetPosition(target);
+                data.Owner.SetPosition(target);
                 return true;
             }
         }
         float delta = data.ExtText.ToFloat();
         if (delta>0)
         {
-            target = player.GetPosition() + delta * player.GetDirection();
+            target = data.Owner.GetPosition() + delta * data.Owner.GetDirection();
             float Y = GetGame().SurfaceY(target[0], target[2]);
             if (target[1]<Y)
             {
                 target[1]=Y;
             }
-            player.SetPosition(target);
+            data.Owner.SetPosition(target);
             return true;
         }
         string sLine = data.ExtText;
         sLine.ToLower();
-        TPointMap sPoints = KCUserCmdSP.GetPoints(KCUserCmdSP.GetUserFileName(player));
-        KCPoint point = sPoints.Get(sLine);
-        if (point)
+        if (pointManager.Teleport(data.Owner, sLine))
         {
-            player.SetPosition(point.Position);
-            player.SetOrientation(point.Orientation);
             return true;
         }
-        sPoints = KCUserCmdSP.GetPoints(KCUserCmdSP.GetGlobalFileName());
-        point = sPoints.Get(sLine);
-        if (point)
-        {
-            player.SetPosition(point.Position);
-            player.SetOrientation(point.Orientation);
-            return true;
-        }
-        KCPlayer.SendMessage(player, "", "Не получилось понять куда вас кинуть");
+        KCPlayer.SendMessage(data.Owner, "", "Не получилось понять куда вас переместить");
         return false;
     }
 
     /** @brief прыгаем в верх*/
-    /*bool JumpUp(PlayerBase player, KCTextCmd data)
+    bool JumpUp(KCTextCmd data)
     {
         float delta = data.ExtText.ToFloat();
-        vector target = player.GetPosition();
+        vector target = data.Owner.GetPosition();
         target[1] = target[1] + delta;
-        player.SetPosition(target);
+        data.Owner.SetPosition(target);
         return true;
     }
     /** @brief Телепортируем игрока к админу*/
-    /*bool TeleportPlayer(PlayerBase player, KCTextCmd data)
+    bool TeleportPlayer(KCTextCmd data)
     {
         if(data.Player != null)
         {
-            data.Player.SetPosition(player.GetPosition());
+            data.Player.SetPosition(data.Owner.GetPosition());
             return true;
         }
         else
         {
-            KCPlayer.SendMessage(player,"","Игрок [" + data.ExtText + "] не найден");
+            KCPlayer.SendMessage(data.Owner,"","Игрок [" + data.ExtText + "] не найден");
             return false;
         }
-    }*/
+    }
 }

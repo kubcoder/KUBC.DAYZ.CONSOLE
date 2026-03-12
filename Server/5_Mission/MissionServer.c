@@ -23,7 +23,7 @@ modded class MissionServer
         usersCmd.RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
         pointManager = new KCPointManager();
         usersCmd.RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP(pointManager));
-        usersCmd.RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
+        usersCmd.RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump(pointManager));
         super.OnInit();   
     }
 
