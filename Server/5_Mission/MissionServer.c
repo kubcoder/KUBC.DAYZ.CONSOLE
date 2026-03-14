@@ -4,7 +4,7 @@ modded class MissionServer
     private ref KCGlChat globalChat;
 
     /// @brief Движок команд игроков
-    private ref KCCmd usersCmd;
+    ref KCCmd usersCmd;
 
     /// @brief Менеджер сохраненных точек
     ref KCPointManager pointManager;
