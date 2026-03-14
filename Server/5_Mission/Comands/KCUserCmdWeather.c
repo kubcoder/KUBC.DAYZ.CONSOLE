@@ -12,15 +12,15 @@ class KCUserCmdWeather : KCUserCMD
     {
         return KCUserCmdWeather.CMD_NAME;
     }
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    override bool Execute(KCTextCmd data)
     {
         Weather w = GetGame().GetWeather();
         Overcast o = w.GetOvercast();
 		Fog f = w.GetFog();
 		Rain r = w.GetRain();
-        KCPlayer.SendMessage(user, "" , "Fog:" + f.GetActual());
-        KCPlayer.SendMessage(user, "" ,  "Overcast:" + o.GetActual());
-        KCPlayer.SendMessage(user, "" ,  "Rain:" + r.GetActual());
+        KCPlayer.SendMessage(data.Owner, "" , "Fog:" + f.GetActual());
+        KCPlayer.SendMessage(data.Owner, "" ,  "Overcast:" + o.GetActual());
+        KCPlayer.SendMessage(data.Owner, "" ,  "Rain:" + r.GetActual());
         if (data.Arg.Count()>0)
         {
             if (data.Arg[0]==CLEAR)
@@ -28,7 +28,7 @@ class KCUserCmdWeather : KCUserCMD
                 r.Set(0, 1,1);
                 o.Set(0, 1,1);
                 f.Set(0, 1,1);
-                KCPlayer.SendMessage(user,"", "Устанавливается ясная погода"); 
+                KCPlayer.SendMessage(data.Owner,"", "Устанавливается ясная погода"); 
                 return true;
             }
             
@@ -41,7 +41,7 @@ class KCUserCmdWeather : KCUserCMD
                 float newRain = data.Arg[pIndex+1].ToFloat();
                 float actRain = r.GetActual();
                 r.Set(newRain, 1,1);
-                KCPlayer.SendMessage(user,"", "Rain:" + actRain + "->" + newRain); 
+                KCPlayer.SendMessage(data.Owner,"", "Rain:" + actRain + "->" + newRain); 
             }
         }
         pIndex = data.Arg.Find(OVERCAST);
@@ -52,7 +52,7 @@ class KCUserCmdWeather : KCUserCMD
                 float newOvercast = data.Arg[pIndex+1].ToFloat();
                 float actOvercast = o.GetActual();
                 o.Set(newOvercast, 1,1);
-                KCPlayer.SendMessage(user,"", "Overcast:" + actOvercast + "->" + newOvercast); 
+                KCPlayer.SendMessage(data.Owner,"", "Overcast:" + actOvercast + "->" + newOvercast); 
             }
         }
         pIndex = data.Arg.Find(FOG);
@@ -63,7 +63,7 @@ class KCUserCmdWeather : KCUserCMD
                 float newFog = data.Arg[pIndex+1].ToFloat();
                 float actFog = f.GetActual();
                 f.Set(newFog, 1,1);
-                KCPlayer.SendMessage(user,"", "Fog:" + actFog + "->" + newFog); 
+                KCPlayer.SendMessage(data.Owner,"", "Fog:" + actFog + "->" + newFog); 
             }
         }
         return true;

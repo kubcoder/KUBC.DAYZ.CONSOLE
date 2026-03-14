@@ -1,56 +1,51 @@
-#ifndef KUBC_TEXT_CMD
-/** @brief Класс расшифровки сообщения чата в данные команды */
+/// @brief Класс расшифровки сообщения чата в данные команды
 class KCTextCmd
 {
-    /** @brief  Символ префикса перед командой */
-    static const string CMD_PREFIX = "/";
-    /** @brief  название команды*/
+    /// @brief  название команды
     string Name = string.Empty;
-    /** @brief  аргументы команды*/
-    ref TStringArray Arg = new TStringArray();
-    /** @brief  игрок к которому применить команду*/
-    PlayerBase Player = NULL;
-    /** @brief  Никнейм игрока кому выдать результаты команды
-    *           В эту строку сбрасывается никнейм игрока, после чего
-    *           выполняется поиск кому же применить команду.
-    */
-    string ExtText = string.Empty;
 
-    /** @brief создать данные команды из сообщения чата*/
-    static KCTextCmd FromChat(string TextCMD)
+    /// @brief  аргументы команды
+    ref TStringArray Arg = new TStringArray();
+
+    /// @brief  игрок к которому применить команду
+    PlayerBase Player = NULL;
+
+    /// @brief Кто вызвал команду
+    PlayerBase Owner = NULL;
+
+    PlayerBase GetTarget()
     {
-        KCTextCmd result = new KCTextCmd();
-        TStringArray tokens = new TStringArray;
-        TextCMD.Split(" ", tokens);
-        if (tokens.Count()>0)
+        if (Player)
         {
-            result.Name = tokens[0];
-            result.Name.ToLower();
-            if (tokens.Count()>1)
-            {
-                TStringArray args = new TStringArray;
-                tokens[1].Split(":", result.Arg);
-            }
-            if (tokens.Count()>2)
-            {
-                for(int i=2; i<tokens.Count(); i++)
-                {
-                    result.ExtText = result.ExtText + tokens.Get(i) + " ";
-                }
-                result.ExtText = result.ExtText.Trim();
-            }
-            result.Player = KCPlayer.Find(result.ExtText);
-            return result;
+            return Player;
         }
-        return NULL;
+        return Owner;
     }
 
-    /** @brief найти целочисленный аргумент с указаным именем
-    *   @param name имя аргумента
-    *   @param default значение по умолчанию
-    *   @return целочисленое значение искомого аргумента 
-    *           если аргумент не найден, то возвращается значение default
-    */
+    string OwnerName()
+    {
+        if (Owner)
+        {
+            return Owner.GetIdentity().GetName();
+        }
+        KCCmd.Log("Не найден игрок который выполнил команду", KCLogLevel.Error);
+        if (Player)
+        {
+            return Player.GetIdentity().GetName();
+        }
+        return "";
+    }
+
+    /// @brief  Никнейм игрока кому выдать результаты команды
+    ///         В эту строку сбрасывается никнейм игрока, после чего
+    ///         выполняется поиск кому же применить команду.
+    string ExtText = string.Empty;
+
+    /// @brief найти целочисленный аргумент с указаным именем
+    /// @param name имя аргумента
+    /// @param default значение по умолчанию
+    /// @return целочисленое значение искомого аргумента 
+    ///         если аргумент не найден, то возвращается значение default
     int GetInt(string name, int default=0)
     {
         string sValue = GetValue(name);
@@ -61,12 +56,11 @@ class KCTextCmd
         return default;
     }
 
-    /** @brief Получить значение аргумента в виде числа с плавающей точкой
-    *   @param name имя аргумента
-    *   @param default значение по умолчанию
-    *   @return значение искомого аргумента если аргумент не найден, 
-    *           то возвращается значение default
-    */
+    /// @brief Получить значение аргумента в виде числа с плавающей точкой
+    /// @param name имя аргумента
+    /// @param default значение по умолчанию
+    /// @return значение искомого аргумента если аргумент не найден, 
+    ///         то возвращается значение default
     float GetFloat(string name, float default=0)
     {
         string sValue = GetValue(name);
@@ -76,11 +70,10 @@ class KCTextCmd
         }
         return default;
     }
-    /** @brief Найти значение аргумента
-    *   @param name имя аргумента
-    *   @return значение искомого аргумента в виде строки, 
-    *           если аргумент не найден, то возвращается пустая строка
-    */
+    /// @brief Найти значение аргумента
+    /// @param name имя аргумента
+    /// @return значение искомого аргумента в виде строки, 
+    ///         если аргумент не найден, то возвращается пустая строка
     string GetValue(string name)
     {
         int fLen = name.Length();
@@ -95,10 +88,9 @@ class KCTextCmd
         return "";
     }
 
-    /** @brief определить есть ли в тексте команды указанный аргумент
-    *   @param name имя аргумента
-    *   @return Истина, если аргумент был найден.
-    */
+    /// @brief определить есть ли в тексте команды указанный аргумент
+    /// @param name имя аргумента
+    /// @return Истина, если аргумент был найден.
     bool ContainsArg(string name)
     {
         int fLen = name.Length();
@@ -113,5 +105,3 @@ class KCTextCmd
         return false;
     }
 }
-#define KUBC_TEXT_CMD
-#endif

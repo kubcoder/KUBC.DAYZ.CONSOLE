@@ -9,19 +9,18 @@ class KCUserCmdGod : KCUserCMD
         return KCUserCmdGod.CMD_NAME;
     }
 
-    override bool OnExecute(PlayerBase user, KCTextCmd data)
+    override bool Execute(KCTextCmd data)
     {
         if (data.Arg[0] == "on")
         {
-            user.SetAllowDamage(false);
-            KCPlayer.SendMessage(user,"","Вы стали богом");
+            data.Owner.SetAllowDamage(false);
+            KCPlayer.SendMessage(data.Owner,"","Вы стали богом");
         }
         else
         {
-            user.SetAllowDamage(true);
-            KCPlayer.SendMessage(user,"","Вы перестали быть богом");
+            data.Owner.SetAllowDamage(true);
+            KCPlayer.SendMessage(data.Owner,"","Вы перестали быть богом");
         }
         return true;
     }
-
 }

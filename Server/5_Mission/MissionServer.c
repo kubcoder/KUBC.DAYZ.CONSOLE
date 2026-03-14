@@ -1,85 +1,76 @@
 modded class MissionServer
 {
-    /** @brief  Инициализируем настройки мода.
-    *           В частности создаем структуру папочек, и файлы настроек 
-                по умолчанию.
-    */
+    /// @brief Экземпляр обрабатывающий глобальный чат
+    private ref KCGlChat globalChat;
+
+    /// @brief Движок команд игроков
+    ref KCCmd usersCmd;
+
+    /// @brief Менеджер сохраненных точек
+    ref KCPointManager pointManager;
+    
+    /// @brief  Инициализируем настройки мода.
+    ///         В частности создаем структуру папочек, и файлы настроек 
+    ///         по умолчанию.
     override void OnInit()
     {
-        KCGlChatSettings.CreatePaths();
-        KCCmd.CreatePaths();
-        RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
-        RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
-        RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
-        RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
-        RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP());
-        RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump());
-        super.OnInit();      
+        ChekPlatform();
+        globalChat = new KCGlChat();
+        usersCmd = new KCCmd();
+        usersCmd.RegisterCommand(KCUserCmdGod.CMD_NAME, new KCUserCmdGod());
+        usersCmd.RegisterCommand(KCUserCmdHeal.CMD_NAME, new KCUserCmdHeal());
+        usersCmd.RegisterCommand(KCUserCmdTime.CMD_NAME, new KCUserCmdTime());
+        usersCmd.RegisterCommand(KCUserCmdWeather.CMD_NAME, new KCUserCmdWeather());
+        pointManager = new KCPointManager();
+        usersCmd.RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP(pointManager));
+        usersCmd.RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump(pointManager));
+        super.OnInit();   
     }
+
+    /// @brief Проверяем под какой платформой запустились
+    ///        Данный метод нужен что бы понять почему мод не работает
+    ///        где то... гребаання кросплатформенность.
+    private void ChekPlatform()
+    {
+        #ifdef PLATFORM_WINDOWS
+        KCLog.Write("KUBC","Сервер собран для Windows");
+        return;
+        #endif
+        #ifdef PLATFORM_LINUX
+        KCLog.Write("KUBC","Сервер собран для Linux");
+        return;
+        #endif
+        KCLog.Write("KUBC","Не смогли определить платформу, работа мода не гарантируется", KCLogLevel.Error);
+    }
+
     /** @brief  ловим события на стороне сервера. Среди потока всех возможных
     *           выделяем события когда игрок отправляет текстовое сообщение в чат
     */
     override void OnEvent(EventType eventTypeId, Param params)  
     {
-        if (eventTypeId==ChatChannelEventTypeID)
-        {
-            KCGlChat.Log("Поймали событие Канала");
-        }
         if (eventTypeId==ChatMessageEventTypeID)
         {
-            KCGlChat.Log("Поймали событие чата");
             ChatMessageEventParams chat = ChatMessageEventParams.Cast(params);
             if (chat)
             {
-                if (chat.param3.Get(0)==KCTextCmd.CMD_PREFIX)
-                {
-                    PlayerBase From = KCPlayer.Find(chat.param2);
-                    if (From)
-                    {
-                        int len = chat.param3.Length() - 1;
-                        string cmdText = chat.param3.Substring(1, len);
-                        KCTextCmd cmdData = KCTextCmd.FromChat(cmdText);
-                        if (cmdData)
-                        {
-                            KCUserCMD currentCommand = CommandDictonary.Get(cmdData.Name);
-                            if (currentCommand)
-                            {
-                                currentCommand.Execute(From, cmdData);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    KCGlChat.Execute(chat);
-                }                
+                DoChat(chat);                
             }
         }
         super.OnEvent(eventTypeId,params);
     }
-    /** @brief справочник команд сервера*/
-    ref map<string, ref KCUserCMD> CommandDictonary = new map<string, ref KCUserCMD>();
 
-    /** @brief Зарегистрировать команду
-    *   @param Name Имя команды
-    *   @param command класс команды
-    */
-    void RegisterCommand(string Name, KCUserCMD command)
+    private void DoChat(ChatMessageEventParams chat)
     {
-        KCCmd.Log("Добавлена команда [" + Name + "]");
-        CommandDictonary.Insert(Name, command);
-        string sFileName = KCUserCMDAccess.GetFileName(Name);
-        if (!FileExist(sFileName))
+        if (usersCmd)
         {
-            KCCmd.Log("Создаем файл настройки доступа по умолчанию для команды [" + Name + "]");            
-            KCUserCMDAccess acces = new KCUserCMDAccess();
-            JsonFileLoader<KCUserCMDAccess>.JsonSaveFile( sFileName, acces);
+            if (usersCmd.Execute(chat))
+            {
+                return;
+            }
         }
-        else
+        if (globalChat)
         {
-            KCCmd.Log("Файл настройки команды [" + Name + "] существует на диске"); 
-        }
+            globalChat.Execute(chat);
+        }        
     }
-
-
 }
