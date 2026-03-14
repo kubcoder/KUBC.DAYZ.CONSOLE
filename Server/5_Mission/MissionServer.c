@@ -7,7 +7,7 @@ modded class MissionServer
     private ref KCCmd usersCmd;
 
     /// @brief Менеджер сохраненных точек
-    private ref KCPointManager pointManager;
+    ref KCPointManager pointManager;
     
     /// @brief  Инициализируем настройки мода.
     ///         В частности создаем структуру папочек, и файлы настроек 

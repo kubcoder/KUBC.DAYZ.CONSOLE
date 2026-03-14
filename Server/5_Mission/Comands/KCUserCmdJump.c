@@ -1,7 +1,7 @@
 /** @brief Команда перемещения игрока по карте */
 class KCUserCmdJump : KCUserCMD
 {
-    static const string CMD_NAME = "jump";
+    const string CMD_NAME = "jump";
 
     override string GetName()
     {
@@ -35,8 +35,8 @@ class KCUserCmdJump : KCUserCMD
         KCPlayer.SendMessage(data.Owner,"","Неправильный формат команды!");
         return false;
     }
-
-    /** @brief путешествуем по карте*/
+    
+    /// @brief путешествуем по карте
     bool JumpTo(KCTextCmd data)
     {
         if (data.Player != null)
@@ -83,7 +83,7 @@ class KCUserCmdJump : KCUserCMD
         return false;
     }
 
-    /** @brief прыгаем в верх*/
+    /// @brief прыгаем в верх
     bool JumpUp(KCTextCmd data)
     {
         float delta = data.ExtText.ToFloat();
@@ -92,7 +92,8 @@ class KCUserCmdJump : KCUserCMD
         data.Owner.SetPosition(target);
         return true;
     }
-    /** @brief Телепортируем игрока к админу*/
+
+    /// @brief Телепортируем игрока к админу
     bool TeleportPlayer(KCTextCmd data)
     {
         if(data.Player != null)
