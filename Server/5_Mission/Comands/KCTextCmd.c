@@ -104,4 +104,19 @@ class KCTextCmd
         }
         return false;
     }
+
+    /// @brief отправить сообщение игроку который вызвал команду
+    void MessageOwner(string message)
+    {
+        KCPlayer.SendMessage(Owner, Name, message);
+    }
+
+    void Message(string message)
+    {
+        if (GetTarget()!=Owner)
+        {
+            KCPlayer.SendMessage(GetTarget(), Owner.GetIdentity().GetName(), message);
+        }
+        KCPlayer.SendMessage(Owner, Name, message);
+    }
 }
