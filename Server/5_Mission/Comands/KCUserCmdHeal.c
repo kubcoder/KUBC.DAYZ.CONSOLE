@@ -87,8 +87,25 @@ class KCUserCmdHeal : KCUserCMD
 
     void CrankHeal(PlayerBase target, string From="")
     {
-        target.RemoveAllAgents();
-        KCPlayer.SendMessage(target, From, "Вас избавили от всех болезней");
+        if (target.m_AgentPool)
+        {
+            if(target.m_AgentPool.m_VirusPool)
+            {
+                if (target.m_AgentPool.m_VirusPool.Count()>0)
+                {
+                    for(int j = 0; j < target.m_AgentPool.m_VirusPool.Count(); j++)
+                    {
+                        target.m_AgentPool.RemoveAgent(target.m_AgentPool.m_VirusPool.GetKey(j));                
+                    }
+                }
+            }
+            KCPlayer.SendMessage(target, From, "Вас избавили от всех болезней");
+        }
+        else
+        {
+            KCPlayer.SendMessage(target, From, "Вы ни чем не болели");
+        }
+        
     }
 
     void EnergyHeal(PlayerBase target, string From="")
