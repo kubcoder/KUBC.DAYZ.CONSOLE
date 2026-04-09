@@ -63,7 +63,7 @@ class KCUserCmdWeather : KCUserCMD
                 float newFog = data.Arg[pIndex+1].ToFloat();
                 float actFog = f.GetActual();
                 f.Set(newFog, 1,1);
-                data.MessageOwner(`"Fog:" + actFog + "->" + newFog); 
+                data.MessageOwner("Fog:" + actFog + "->" + newFog); 
             }
         }
         return true;
