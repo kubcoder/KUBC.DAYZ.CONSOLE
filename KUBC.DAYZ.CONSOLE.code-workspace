@@ -20,7 +20,10 @@
 		"C_Cpp.errorSquiggles": "disabled",
 		"C_Cpp.intelliSenseEngine": "Tag Parser",
 		"C_Cpp.workspaceSymbols": "All",
-		"git.autoRepositoryDetection": "subFolders"
+		"git.autoRepositoryDetection": "subFolders",
+		"enscript.includePaths": [
+			"P:\\scripts",
+		],
 	},
 	"folders": [
 		{
