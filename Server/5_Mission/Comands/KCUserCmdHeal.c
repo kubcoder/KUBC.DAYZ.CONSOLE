@@ -95,7 +95,7 @@ class KCUserCmdHeal : KCUserCMD
                 {
                     for(int j = 0; j < target.m_AgentPool.m_VirusPool.Count(); j++)
                     {
-                        target.m_AgentPool.RemoveAgent(target.m_AgentPool.m_VirusPool.GetKey(j));                
+                        target.m_AgentPool.SetAgentCount(target.m_AgentPool.m_VirusPool.GetKey(j),0);                
                     }
                 }
             }

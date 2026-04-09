@@ -63,7 +63,7 @@ class KCUserCmdAgent : KCUserCMD
                     int aID = data.Arg[1].ToInt();
                     float aCount = data.Arg[2].ToFloat();
                     data.GetTarget().InsertAgent(aID, aCount);
-                    data.MessageOwner("Вкатили " + aID + " в количестве " + aCount)
+                    data.MessageOwner("Вкатили " + aID + " в количестве " + aCount);
                 }
                 break;
         }
