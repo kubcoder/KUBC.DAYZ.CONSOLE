@@ -89,16 +89,9 @@ class KCUserCmdHeal : KCUserCMD
     {
         if (target.m_AgentPool)
         {
-            if(target.m_AgentPool.m_VirusPool)
-            {
-                if (target.m_AgentPool.m_VirusPool.Count()>0)
-                {
-                    for(int j = 0; j < target.m_AgentPool.m_VirusPool.Count(); j++)
-                    {
-                        target.m_AgentPool.SetAgentCount(target.m_AgentPool.m_VirusPool.GetKey(j),0);                
-                    }
-                }
-            }
+            target.GetModifiersManager().DeactivateAllModifiers();
+			if ( target.m_AgentPool )
+				target.m_AgentPool.RemoveAllAgents();
             KCPlayer.SendMessage(target, From, "Вас избавили от всех болезней");
         }
         else
