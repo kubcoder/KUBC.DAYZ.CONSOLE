@@ -20,7 +20,10 @@
 		"C_Cpp.errorSquiggles": "disabled",
 		"C_Cpp.intelliSenseEngine": "Tag Parser",
 		"C_Cpp.workspaceSymbols": "All",
-		"git.autoRepositoryDetection": "subFolders"
+		"git.autoRepositoryDetection": "subFolders",
+		"enscript.includePaths": [
+			"P:\\scripts",
+		],
 	},
 	"folders": [
 		{
@@ -76,6 +79,20 @@
 				"label": "Create Link",
 				"type": "shell",
 				"command": "cmd /c mklink /j '${config:DayZ.Server.Path}\\KUBC.DAYZ.CONSOLE'  '${workspaceFolder:SERVER}'",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				}
+			},
+			{
+				"detail": "Создать ссылочную папку на диске P",
+				"label": "Create Dev Link",
+				"type": "shell",
+				"command": "cmd /c mklink /j 'P:\\KUBC.DAYZ.CONSOLE'  '${workspaceFolder:SERVER}'",
 				"presentation": {
 					"echo": true,
 					"reveal": "always",

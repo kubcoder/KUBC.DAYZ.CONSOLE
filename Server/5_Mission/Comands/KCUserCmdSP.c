@@ -43,12 +43,12 @@ class KCUserCmdSP : KCUserCMD
                 if (data.ContainsArg(ATT_OWERWRITE))
                 {
                     point.Set(data.Owner);
-                    KCPlayer.SendMessage(data.Owner,"", "Точка [" + pointName + "] обновлена"); 
+                    data.MessageOwner("Точка [" + pointName + "] обновлена"); 
                     Log("Точка [" + pointName + "] обновлена", data.Owner);               
                 }
                 else
                 {
-                    KCPlayer.SendMessage(data.Owner,"", "Точка [" + pointName + "] уже существует!"); 
+                    data.MessageOwner("Точка [" + pointName + "] уже существует!"); 
                     return false;
                 }
             }
@@ -57,7 +57,7 @@ class KCUserCmdSP : KCUserCMD
                 point = new KCPoint();
                 point.Set(data.Owner);
                 points.Insert(pointName, point);
-                KCPlayer.SendMessage(data.Owner,"", "Точка [" + pointName + "] добавлена");   
+                data.MessageOwner( "Точка [" + pointName + "] добавлена");   
                 Log("Точка [" + pointName + "] добавлена", data.Owner);
             }
             pointManager.Save(fileName, points);

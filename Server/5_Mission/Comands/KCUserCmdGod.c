@@ -14,12 +14,13 @@ class KCUserCmdGod : KCUserCMD
         if (data.Arg[0] == "on")
         {
             data.Owner.SetAllowDamage(false);
-            KCPlayer.SendMessage(data.Owner,"","Вы стали богом");
+            data.MessageOwner("Вы стали богом");
+            
         }
         else
         {
             data.Owner.SetAllowDamage(true);
-            KCPlayer.SendMessage(data.Owner,"","Вы перестали быть богом");
+            data.MessageOwner("Вы перестали быть богом");
         }
         return true;
     }

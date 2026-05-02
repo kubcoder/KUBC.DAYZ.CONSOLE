@@ -25,7 +25,7 @@ class KCUserCmdTime : KCUserCMD
                 hour = 12;
                 minute = 0;
                 GetGame().GetWorld().SetDate(year, month, day, hour, minute);
-                KCPlayer.SendMessage(data.Owner, "", "сейчас будет день");
+                data.MessageOwner("сейчас будет день");
                 return true;
             }
             if (data.Arg[0] == MORNING)
@@ -33,7 +33,7 @@ class KCUserCmdTime : KCUserCMD
                 hour = 8;
                 minute = 0;
                 GetGame().GetWorld().SetDate(year, month, day, hour, minute);
-                KCPlayer.SendMessage(data.Owner, "", "сейчас будет утро");
+                data.MessageOwner("сейчас будет утро");
                 return true;
             }
             if (data.Arg[0] == EVENING)
@@ -41,7 +41,7 @@ class KCUserCmdTime : KCUserCMD
                 hour = 18;
                 minute = 0;
                 GetGame().GetWorld().SetDate(year, month, day, hour, minute);
-                KCPlayer.SendMessage(data.Owner, "", "сейчас будет вечер");
+                data.MessageOwner("сейчас будет вечер");
                 return true;
             }
             if (data.Arg[0] == NIGHT)
@@ -49,7 +49,7 @@ class KCUserCmdTime : KCUserCMD
                 hour = 0;
                 minute = 0;
                 GetGame().GetWorld().SetDate(year, month, day, hour, minute);
-                KCPlayer.SendMessage(data.Owner, "", "сейчас будет ночь");
+                data.MessageOwner("сейчас будет ночь");
                 return true;
             }
             if (data.Arg.Count()>1)
@@ -57,11 +57,11 @@ class KCUserCmdTime : KCUserCMD
                 hour = data.Arg[0].ToInt();
                 minute = data.Arg[1].ToInt();
                 GetGame().GetWorld().SetDate(year, month, day, hour, minute);
-                KCPlayer.SendMessage(data.Owner, "", "Устанавливается время " + hour.ToStringLen(2) + ":" + minute.ToStringLen(2));
+                data.MessageOwner( "Устанавливается время " + hour.ToStringLen(2) + ":" + minute.ToStringLen(2));
                 return true;
             }
         }
-        KCPlayer.SendMessage(data.Owner, "", day.ToStringLen(2) + "." + month.ToStringLen(2) + "." + year.ToStringLen(4) + " " + hour.ToStringLen(2) + ":" + minute.ToStringLen(2));
+        data.MessageOwner(day.ToStringLen(2) + "." + month.ToStringLen(2) + "." + year.ToStringLen(4) + " " + hour.ToStringLen(2) + ":" + minute.ToStringLen(2));
         return true;
     }
 }

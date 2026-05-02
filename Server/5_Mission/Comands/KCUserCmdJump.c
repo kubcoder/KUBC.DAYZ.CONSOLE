@@ -32,7 +32,7 @@ class KCUserCmdJump : KCUserCMD
             return JumpUp(data);
             
         }
-        KCPlayer.SendMessage(data.Owner,"","Неправильный формат команды!");
+        data.MessageOwner("Неправильный формат команды!");
         return false;
     }
     
@@ -79,7 +79,7 @@ class KCUserCmdJump : KCUserCMD
         {
             return true;
         }
-        KCPlayer.SendMessage(data.Owner, "", "Не получилось понять куда вас переместить");
+        data.MessageOwner("Не получилось понять куда вас переместить");
         return false;
     }
 
@@ -103,7 +103,7 @@ class KCUserCmdJump : KCUserCMD
         }
         else
         {
-            KCPlayer.SendMessage(data.Owner,"","Игрок [" + data.ExtText + "] не найден");
+            data.MessageOwner("Игрок [" + data.ExtText + "] не найден");
             return false;
         }
     }
