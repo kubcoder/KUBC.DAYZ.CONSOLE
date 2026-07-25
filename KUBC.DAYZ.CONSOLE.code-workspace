@@ -4,23 +4,6 @@
 		"DayZ.Server.Config":"Sample\\serverDZ.cfg",
 		//Папочка где лежит экземпляр сервера DAYZ
 		"DayZ.Server.Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\DayZServer",
-		"C_Cpp.configurationWarnings": "disabled",
-		"C_Cpp.default.browse.path": [
-			"P:\\scripts",
-			"./Server"
-		],
-		"C_Cpp.default.includePath": [
-			"P:\\scripts",
-			"./Server"
-		],
-		"C_Cpp.default.systemIncludePath": [
-			"P:\\scripts",
-			"./Server"
-		],
-		"C_Cpp.errorSquiggles": "disabled",
-		"C_Cpp.intelliSenseEngine": "Tag Parser",
-		"C_Cpp.workspaceSymbols": "All",
-		"git.autoRepositoryDetection": "subFolders",
 		"enscript.includePaths": [
 			"P:\\scripts",
 		],
@@ -33,10 +16,6 @@
 		{
 			"name": "PROFILES",
 			"path": "./Sample/Profiles"
-		},
-		{
-			"name": "Build Logs",
-			"path": "P:\\Temp"
 		},
 		{
 			"name": "ROOT",
