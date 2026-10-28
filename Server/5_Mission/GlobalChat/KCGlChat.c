@@ -23,7 +23,6 @@ class KCGlChat
             string From = player.GetIdentity().GetName(); 
             array<Man> players = new array<Man>; 
             GetGame().GetPlayers(players);
-            Param1<string> pt = new Param1<string>(Message);
             foreach(Man m:players)
             {
                 PlayerBase reciver = PlayerBase.Cast(m);
@@ -31,7 +30,7 @@ class KCGlChat
                 {
                     if (reciver != player)
                     {
-                        GetGame().RPCSingleParam(reciver, ERPCs.RPC_USER_ACTION_MESSAGE, pt, true, reciver.GetIdentity());
+                        KCPlayer.SendMessage(reciver, From, Message);
                     }
                 }
             }

@@ -2,6 +2,8 @@
 /** @brief Инструменты работы с игроками */
 class KCPlayer
 {
+	static ref KCGlChatColorSettingsFactory options = new KCGlChatColorSettingsFactory();
+
     /** @brief Выполняем поиск игрока
 	*	@param name имя или PlainID игрока
 	*/
@@ -72,19 +74,12 @@ class KCPlayer
     */
     static void SendMessage(PlayerBase player, string From, string Message)
     {
-        Param1<string> pt;
+        string msg = Message;
         if (From!="")
         {
-            pt = new Param1<string>(From + ":" + Message);
+            msg = From + ":" + Message;
         }
-        else
-        {
-            pt = new Param1<string>(Message);
-        }
-        if (player.GetIdentity())
-		{
-			GetGame().RPCSingleParam(player, ERPCs.RPC_USER_ACTION_MESSAGE, pt, true, player.GetIdentity());
-		}
+        player.Message(msg, options.Config.ChatColor);
     }
 }
 #define KUBC_PLAYER
