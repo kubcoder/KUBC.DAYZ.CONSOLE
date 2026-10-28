@@ -15,7 +15,8 @@ class KCMsgCMD : KCUserCMD
         {
             style = data.Arg[0];
         }
-        data.GetTarget().Message("Тестовое сообщение", style);
+        //data.GetTarget().Message("Тестовое сообщение", style);
+        GetGame().ChatMP(data.GetTarget(), "Тестовое сообщение", style);
         return true;
     }
 }
