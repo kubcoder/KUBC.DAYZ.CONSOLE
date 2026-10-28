@@ -10,6 +10,7 @@ class KCUserCmdHeal : KCUserCMD
     static const string ENERGY = "e";
     static const string COLD = "t";
     static const string DRINK = "d";
+    static const string HOT = "c";
     
     override string GetName()
     {
@@ -47,6 +48,11 @@ class KCUserCmdHeal : KCUserCMD
         if((pIndex>-1)||(data.Arg[0]==ALL))
         {
             DrinkHeal(data.GetTarget(), data.OwnerName());
+        }
+        pIndex = data.Arg.Find(HOT);
+        if(pIndex>-1)
+        {
+            HotHeal(data.GetTarget(), data.OwnerName());
         }
         return true;
     }
@@ -116,6 +122,14 @@ class KCUserCmdHeal : KCUserCMD
         target.GetStatSpecialty().Set(target.GetStatSpecialty().GetMax());
         target.GetStatHeatBuffer().Set(target.GetStatHeatBuffer().GetMax());
         KCPlayer.SendMessage(target, From, "Вас обогрели");
+    }
+    void HotHeal(PlayerBase target, string From="")
+    {
+        target.GetStatHeatComfort().Set(-1);
+        //target.GetStatTremor().Set(target.GetStatTremor().GetMin());
+        //target.GetStatSpecialty().Set(target.GetStatSpecialty().GetMin());
+        target.GetStatHeatBuffer().Set(target.GetStatHeatBuffer().GetMin());
+        KCPlayer.SendMessage(target, From, "Вас охладили");
     }
 
     void DrinkHeal(PlayerBase target, string From="")
