@@ -25,6 +25,7 @@ modded class MissionServer
         usersCmd.RegisterCommand(KCUserCmdSP.CMD_NAME, new KCUserCmdSP(pointManager));
         usersCmd.RegisterCommand(KCUserCmdJump.CMD_NAME, new KCUserCmdJump(pointManager));
         usersCmd.RegisterCommand(KCUserCmdAgent.CMD_NAME, new KCUserCmdAgent());
+        usersCmd.RegisterCommand(KCMsgCMD.CMD_NAME, new KCMsgCMD());
         super.OnInit();   
     }
 
