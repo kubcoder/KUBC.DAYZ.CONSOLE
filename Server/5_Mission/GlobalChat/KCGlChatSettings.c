@@ -1,5 +1,5 @@
 /// @brief настройки глобального чата
-class KCGlChatSettings
+class KCGlChatSettings : KCGlChatColorSettings
 {
     /// @brief Включение глобального чата
     bool Enable = true;
