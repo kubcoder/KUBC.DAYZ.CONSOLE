@@ -4,5 +4,5 @@
     "Access": 0,
     "Players": [],
     "ExecuteSymbols": [],
-    "MessageFormat": "%1:%2"
+    "MessageFormat": "%1-%2"
 }

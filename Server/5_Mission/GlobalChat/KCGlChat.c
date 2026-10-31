@@ -16,11 +16,10 @@ class KCGlChat
     /// @brief Кидаем мессагу всем игрокам сервера
     /// @param player от кого мессага, если тут будет NULL сообщение отправлено не будет
     /// @param Message текст сообщения
-    static void SendToAll(PlayerBase player, string Message)
+    void SendToAll(PlayerBase player, string Message)
     {
         if ((player)&&(player.GetIdentity()))
         {
-            string From = player.GetIdentity().GetName(); 
             array<Man> players = new array<Man>; 
             GetGame().GetPlayers(players);
             foreach(Man m:players)
@@ -30,7 +29,7 @@ class KCGlChat
                 {
                     if (reciver != player)
                     {
-                        KCPlayer.SendMessage(reciver, From, Message);
+                        KCPlayer.SendMessage(reciver, "", Message);
                     }
                 }
             }

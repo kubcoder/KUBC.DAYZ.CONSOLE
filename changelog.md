@@ -1,4 +1,6 @@
 # Журнал версий
+## [5.1](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/releases/tag/5.1)
+- [#33](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/issues/33) исправлено задвоение ников игрока в глобальном чате.
 ## [5.0](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/releases/tag/5.0)
 - Изменен поиск игроков по имени. Если имя игрока дублируется, то игрок не будет найден. Однако если игрок Survivor один на сервере обработка текстовых сообщений от него выполняется в полном объеме.
 - Добавлена настройка цвета глобального чата в файле `GlobalChat.json`
