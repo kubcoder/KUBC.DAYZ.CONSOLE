@@ -11,6 +11,7 @@ class KCPlayer
 	{
 		PlayerBase p;
 		name.ToLower();
+		name.ToLower();
 		int i =0;
 		//Получаем список всех игроков на сервере
 		array<Man> players = new array<Man>; 
@@ -60,11 +61,13 @@ class KCPlayer
 			{
 				string pn = p.GetIdentity().GetName();
 				pn.ToLower();
-				if(pn == name) 
-					return count++;
+				if(pn == name)
+				{
+					count++;
+				}
 			}
 		}
-		return count>1;
+		return count > 1;
 	}
 
     /** @brief: Отправляем мессагу игроку

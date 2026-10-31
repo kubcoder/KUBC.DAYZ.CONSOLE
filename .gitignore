@@ -12,6 +12,7 @@ thing.obf
 /Sample/dayzOffline.enoch/env
 /Sample/dayzOffline.enoch/storage_*
 !/Sample/dayzOffline.enoch/init.c
+.bitclient
 
 
 ## Ignore Visual Studio temporary files, build results, and

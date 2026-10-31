@@ -14,7 +14,7 @@ class CfgMods
 	{
 		name = "KUBC.DAYZ.CONSOLE";
 		author = "kubcoder";
-		version = 5.1;
+		version = 5.2;
 		type = "mod";
 		class defs 
 		{

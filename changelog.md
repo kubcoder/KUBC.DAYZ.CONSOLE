@@ -1,4 +1,7 @@
 # Журнал версий
+## [5.2](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/releases/tag/5.2)
+- Исправлена проверка дублирующихся ников: теперь учитываются все совпадения среди игроков онлайн. При совпадающем нике поиск по имени не выбирает одного из игроков.
+- Исправлен поиск игрока: не учитывается регистр никнейма
 ## [5.1](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/releases/tag/5.1)
 - [#33](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/issues/33) исправлено задвоение ников игрока в глобальном чате.
 ## [5.0](https://github.com/kubcoder/KUBC.DAYZ.CONSOLE/releases/tag/5.0)
